@@ -1,7 +1,7 @@
 # _asm_emitGenerator
 对字符串和地址自动生成_asm_emit(0xXX)文本的py脚本
 
-==需要下个剪贴板的库`pyperclip`==
+需要下个剪贴板的库`pyperclip`
 `pip install pyperclip`
 
 
