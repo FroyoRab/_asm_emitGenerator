@@ -12,21 +12,24 @@ def generatorAsmEmit():
 #########################################'''
     )
 
-    str = input("输入需要转换的字符串:")
+    str = input("输入需要转换的字符串或0x开头的地址:")
+    startPos = int(input("请输入十六进制偏移位置:0x"),16)
     outStr = ""
-    count = 0
+    colCount = 0
     if isAddress(str):
         for index in range(len(str)-2,0,-2):
             outStr += template.format("0x"+str[index:index+2])
+        outStr = "// {} - {:#3x}\n{}".format(str,startPos+int((len(str)-2)/2),outStr)
 
     else:
         for oneChar in str:
             outStr += template.format(hex(ord(oneChar)))
-            count += 1
-            if count > 3:
+            colCount += 1
+            if colCount > 3:
                 outStr+="\n"
-                count = 0
+                colCount = 0
         outStr+=template.format(hex(0))
+        outStr = '// "{}" - {:#3x}\n{}'.format(str, startPos + len(str)+1, outStr)
 
     print(outStr)
     pyperclip.copy(outStr)
